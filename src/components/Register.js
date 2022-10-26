@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../context/UserContext';
-
+import { useState } from 'react';
 const Register = () => {
+  const [passwordError, setPasswordError] = useState('');
+
+
 const { createUser } = useContext(AuthContext);
 console.log('createUser', createUser);
 
@@ -15,6 +18,20 @@ console.log('createUser', createUser);
         const birth = form.birth.value;
         const number = form.number.value;
         console.log(name, email, password, birth, number);
+
+        if(!/(?=.*[!@#$&*])/.test(password)){
+          setPasswordError('Please provide at least one special case letter.')
+          return;
+        }
+        if(!/(?=.*[0-9].*[0-9])/.test(password)){
+          setPasswordError('Please provide at least two digits.')
+          return;
+        }
+        if(password.length < 8){
+          setPasswordError('Password should be 8 characters.')
+          return;
+        }
+        setPasswordError('');
 
         createUser(email, password)
         .then(result =>{
@@ -46,7 +63,7 @@ console.log('createUser', createUser);
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className="label-text">Mobile Number</span>
+                          <span className="label-text">mobile Number</span>
                         </label>
                         <input
                           name="number"
@@ -91,6 +108,7 @@ console.log('createUser', createUser);
                           className="input input-bordered"
                           required
                         />
+                        <p className='text-red-700'>{passwordError}</p>
                         <p>
                           Already have account? Please, <Link className="text-red-600" to="/login">LogIn</Link>
                         </p>
@@ -98,6 +116,16 @@ console.log('createUser', createUser);
                       <div className="form-control mt-6">
                         <button className="btn btn-primary">Register</button>
                       </div>
+
+                      <h2 className='text-center'>
+                        or
+                      </h2>
+
+                    <div className='flex justify-center gap-4'>
+                       <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="" />
+
+                        <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                    </div>
                     </form>
                     
                   </div>
