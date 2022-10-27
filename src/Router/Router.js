@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../components/Blog';
 import Courses from '../components/Courses';
@@ -42,8 +43,10 @@ import Main from '../Layout/Main';
           element: <Blog></Blog>
         },
         {
-          path: '/course',
+          path: '/course/:id',
+          loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`),
           element: <Data></Data>
+          
         },
         {
           path: '*',

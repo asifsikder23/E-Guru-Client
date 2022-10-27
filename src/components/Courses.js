@@ -1,6 +1,8 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Course from "./Course";
+import Data from "./Data";
+
 
 const Courses = () => {
     const courses = useLoaderData();
@@ -36,9 +38,12 @@ const Courses = () => {
        
         
         <div className="flex flex-wrap justify-center gap-5 col-span-3">
+
         {courses.map(course=>{
                 return <Course course={course}></Course>
         })}
+        
+
         </div>
         
       </div>

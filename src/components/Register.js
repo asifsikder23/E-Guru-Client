@@ -2,8 +2,41 @@ import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../context/UserContext';
 import { useState } from 'react';
+ 
+
+
+
 const Register = () => {
+
+
   const [passwordError, setPasswordError] = useState('');
+
+  const {googleSignIn, gitSignIn} = useContext(AuthContext)
+  
+  const handleGoogleLogIn =()=>{
+    googleSignIn()
+    .then(result => {
+      const user = result.user;
+      
+      console.log(user);
+    })
+    .catch(error =>{
+      console.error('error: ', error)
+    })
+  }
+  const handleGitLogIn =()=>{
+    gitSignIn()
+    .then(result => {
+      const user = result.user;
+      
+      console.log(user);
+    })
+    .catch(error =>{
+      console.error('error: ', error)
+    })
+  }
+  
+
 
 
 const { createUser } = useContext(AuthContext);
@@ -122,9 +155,9 @@ console.log('createUser', createUser);
                       </h2>
 
                     <div className='flex justify-center gap-4'>
-                       <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="" />
+                       <img onClick={handleGoogleLogIn} className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="" />
 
-                        <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                        <img onClick={handleGitLogIn}  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
                     </div>
                     </form>
                     
@@ -142,6 +175,5 @@ console.log('createUser', createUser);
             </div>
           );
     
-};
-
+}
 export default Register;

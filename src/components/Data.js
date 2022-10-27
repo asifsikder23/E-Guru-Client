@@ -1,24 +1,33 @@
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { useRef } from "react";
+import { useLoaderData } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 
 const Data = () => {
+  const course = useLoaderData();
+  console.log(course);
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "emp-data",
+    onafterprint: () => alert("Print Success"),
+  });
   return (
     <div>
-      <div className="container mx-auto flex flex-wrap py-6">
+      <div ref={componentRef} className="container mx-auto flex flex-wrap py-6">
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
           <article className="flex flex-col shadow my-4">
             <a href="#" className="hover:opacity-75">
-              <img src="https://getkt.com/wp-content/uploads/2019/02/Cross-Origin-Resource-Sharing.jpg" />
+              <img src={course.img} />
             </a>
             <div className="bg-white flex flex-col justify-start p-6">
               <a
                 href="#"
-                className="text-blue-700 text-sm font-bold uppercase pb-4"
+                className="text-3xl font-bold hover:text-gray-700 pb-4"
               >
-                Technology
-              </a>
-              <a href="#" className="text-3xl font-bold hover:text-gray-700 pb-4">
-                CORS?
+                {course.categoryName}
               </a>
               <p href="#" className="text-sm pb-8">
                 By{" "}
@@ -27,16 +36,8 @@ const Data = () => {
                 </a>
                 , Published on October 27th, 2020
               </p>
-              <h1 className="text-2xl font-bold pb-3">What is CORS?</h1>
-              <p className="pb-3">
-                Cross-origin resource sharing (CORS) is a browser mechanism
-                which enables controlled access to resources located outside of
-                a given domain. It extends and adds flexibility to the
-                same-origin policy (SOP). However, it also provides potential
-                for cross-domain attacks, if a website's CORS policy is poorly
-                configured and implemented. CORS is not a protection against
-                cross-origin attacks such as cross-site request forgery (CSRF).
-              </p>
+              <h1 className="text-2xl font-bold pb-3">About Courses</h1>
+              <p className="pb-3">{course.Description}</p>
               <p className="pb-3">
                 The role of a CORS policy is to maintain the integrity of a
                 website and secure it from unauthorized access. The CORS
@@ -53,14 +54,12 @@ const Data = () => {
               </p>
             </div>
           </article>
-          
-          
 
           <div className="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
             <div className="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
               <img
                 src="https://scontent.fdac145-1.fna.fbcdn.net/v/t39.30808-6/274233181_3085646058375783_6690705659848583132_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_eui2=AeHYmM8By5Myxtb_oY0ILgelRCR17VNXxDBEJHXtU1fEMKDbGp-fVNIrgPRzX4dJhQw7i8rXwM919KgUH0m-9vlS&_nc_ohc=QolRrm1g3DYAX_pWeqX&_nc_ht=scontent.fdac145-1.fna&oh=00_AfArrUEdIx_n8paQcHC_cJliCDAT48-HQrTyg-IYeS41_Q&oe=635F1FED"
-                class="rounded-full shadow h-32 w-32"
+                className="rounded-full shadow h-32 w-32"
               />
             </div>
             <div className="flex-1 flex flex-col justify-center md:justify-start">
@@ -95,22 +94,38 @@ const Data = () => {
         </section>
 
         <div className="w-full md:w-1/3 flex flex-col items-center px-3">
-
-        <button className="btn btn-wide">Download PDF 
-        <ArrowDownIcon className="h-6 w-6 text-blue-500"/>
-        </button>
+          <button onClick={handlePrint} className="btn btn-wide">
+            Download PDF
+            <ArrowDownIcon className="h-6 w-6 text-blue-500" />
+          </button>
 
           <div className="w-full bg-white shadow flex flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">About Us</p>
-            <p className="pb-2">
-              The way we work has been irreversibly disrupted. Covid-19 has
-              unmasked a desire for people to work on their own terms. At their
-              own pace. In their own environment. As hybrid workplaces
-              increasingly become the norm, hybrid learning is reinventing the
-              way we approach professional and on-the-job training & education.
-              Let our guide be your guide to adopting hybrid learning into your
-              training programs.
-            </p>
+            <p className="text-xl font-semibold pb-5">Requirements:</p>
+            <p className="pb-2">{course.requirements}</p>
+
+            <div className="stats stats-vertical lg:stats-horizontal shadow">
+              <div className="stat">
+                <div className="stat-title">Hours</div>
+                <div className="stat-value">{course.hours}</div>
+              </div>
+
+              <div className="stat">
+                <div className="stat-title">Price</div>
+                <div className="stat-value">{course.price}$</div>
+                
+              </div>
+
+              <div className="stat">
+                <div className="stat-title">CourseType</div>
+                <div className="stat-value">{course.courseType}</div>
+              </div>
+
+              <div className="stat">
+                <div className="stat-title">Certification</div>
+                <div className="stat-value">{course.certification}</div>
+              </div>
+            </div>
+
             <a
               href="#"
               className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"

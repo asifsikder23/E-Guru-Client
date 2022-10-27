@@ -1,8 +1,42 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/UserContext";
+import { useState } from 'react';
+
+import {getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth';
+import app from "../firebase/firebase.init";
+ 
+
+  const auth = getAuth(app)
 
 const Login = () => {
+
+  const [user, setUser] = useState({});
+  const googleProvider = new GoogleAuthProvider();
+  const gitProvider = new GithubAuthProvider();
+
+  const handleGoogleLogIn =()=>{
+    signInWithPopup(auth, googleProvider)
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      console.log(user);
+    })
+    .catch(error =>{
+      console.error('error: ', error)
+    })
+  }
+  const handleGitLogIn =()=>{
+    signInWithPopup(auth, gitProvider)
+    .then(result=>{
+      const user = result.user;
+      setUser(user);
+      console.log(user);
+    })
+    .catch(error =>{
+      console.error('error: ', error)
+    })
+  }
 
   const {signIn} = useContext(AuthContext);
 
@@ -75,9 +109,9 @@ const Login = () => {
               </div>
 
               <div className='flex justify-center gap-4'>
-                       <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="" />
+                       <img onClick={handleGoogleLogIn} className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="" />
 
-                        <img  className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+                        <img onClick={handleGitLogIn} className='w-10 bg-white p-2 rounded-full cursor-pointer' src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
                     </div>
             </form>
           </div>

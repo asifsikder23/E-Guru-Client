@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import logo from '../e-guru.png';
+import { useContext } from "react";
+import { AuthContext } from "../context/UserContext";
 
 const Header = () => {
+  const {user} = useContext(AuthContext)
   return (
     <div>
       <div className="navbar bg-slate-900">
@@ -82,7 +85,22 @@ const Header = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
+
+              {
+                          user.photoURL?
+                          <label tabindex="0" className="btn btn-ghost btn-circle avatar avatar online">
+                          <div className="w-10 rounded-full">
+                          <img src={user.photoURL}/>
+                          </div>
+                          </label>
+                          :
+                          <label tabindex="0" className="btn btn-ghost btn-circle avatar avatar offline">
+                          <div className="w-10 rounded-full">
+                          <img src={user.photoURL}/>
+                          </div>
+                          </label>
+                        }
+                
               </div>
             </label>
             <ul
@@ -96,7 +114,10 @@ const Header = () => {
                 <a>Settings</a>
               </li>
               <li>
-              <Link to={"/login"}>login</Link>
+                
+              
+              
+              <Link to={"/login"}>log out</Link>
               </li>
             </ul>
           </div>
@@ -114,16 +135,16 @@ const Header = () => {
                           </a>
                           </div>
 
-                    <section className="w-64 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
+                    <section className="w-72 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
                       
 
                         <div className="mt-6 w-fit mx-auto">
-                            <img src="https://api.lorem.space/image/face?w=120&h=120&hash=bart89fe" className="rounded-full w-28 " alt="profile picture"/>
+                            <img src={user.photoURL}/>
                         </div>
 
                         <div className="mt-8 ">
-                            <h2 className="text-white font-bold text-2xl tracking-wide">Jonathan <br/> Smith</h2>
-                            <p className="text-white">asifullahsikder@gmail.com</p>
+                            <h2 className="text-white font-bold text-2xl tracking-wide">{user.displayName}</h2>
+                            <p className="text-white">{user.email}</p>
                         </div>
                         <p className="text-emerald-400 font-semibold mt-2.5" >
                             Active
