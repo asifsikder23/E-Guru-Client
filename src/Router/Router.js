@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../components/Blog';
 import Courses from '../components/Courses';
+import Data from '../components/Data';
+import Error from '../components/Error';
 import Faq from '../components/Faq';
 import Home from '../components/Home';
 import Login from '../components/Login';
@@ -38,6 +40,14 @@ import Main from '../Layout/Main';
         {
           path: '/blog',
           element: <Blog></Blog>
+        },
+        {
+          path: '/course',
+          element: <Data></Data>
+        },
+        {
+          path: '*',
+          element: <Error></Error>
         }
       ]
     }

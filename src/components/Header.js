@@ -12,7 +12,7 @@ const Header = () => {
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-5 w-5 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -27,10 +27,10 @@ const Header = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-slate-900 rounded-box w-52"
             >
               <li>
-                <Link className="text-white" to={'/home'}>Home</Link>
+                <Link className="text-white" to={'/'}>Home</Link>
               </li>
               <li>
               <Link className="text-white" to={'/courses'}>Courses</Link>

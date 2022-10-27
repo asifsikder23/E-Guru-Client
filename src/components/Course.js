@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const Course = ({ course }) => {
@@ -19,7 +20,7 @@ const Course = ({ course }) => {
             <div className="badge badge-outline">Fashion</div>
             <div className="badge badge-outline">Products</div>
           </div>
-          <button className="btn btn-block my-5">Premium</button>
+          <Link className="btn btn-block my-5" to={'/course'}>Premium</Link>
         </div>
       </div>
     </div>
