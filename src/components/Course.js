@@ -2,6 +2,7 @@ import React from "react";
 
 
 const Course = ({ course }) => {
+  console.log(course);
   return (
     <div>
       <div className="card w-72 bg-base-100 shadow-xl">
