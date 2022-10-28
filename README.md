@@ -2,7 +2,13 @@
 This is a Website for E-Learning with HTML CSS JS and React. It is build with React JS.
 
 ## Live Page
-Netlify Link: 
+Live site: https://e-guru-ed2ec.web.app/
+
+## Server Side Code
+Client Side Code Link: https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-asifsikder23
+
+## Client Side Code
+Client Side Code link: https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-asifsikder23
 
 ## React JS
 Documention Link: [React](https://reactjs.org/)
