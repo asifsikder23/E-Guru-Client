@@ -34,7 +34,7 @@ import Main from '../Layout/Main';
         {
           path: '/courses',
           element: <Courses></Courses>,
-          loader: () => fetch('http://localhost:5000/courses')
+          loader: () => fetch('https://e-guru-server.vercel.app/courses')
         },
         {
           path: '/faq',
@@ -46,7 +46,7 @@ import Main from '../Layout/Main';
         },
         {
           path: '/course/:id',
-          loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`),
+          loader: ({params}) => fetch(`https://e-guru-server.vercel.app/course/${params.id}`),
           element: <Data></Data>
           
         },
