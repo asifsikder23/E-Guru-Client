@@ -5,8 +5,13 @@ import logo from '../e-guru.png';
 import { useContext } from "react";
 import { AuthContext } from "../context/UserContext";
 
+
 const Header = () => {
-  const {user} = useContext(AuthContext)
+
+  const {user, logOut} = useContext(AuthContext)
+  console.log(user);
+
+
   return (
     <div>
       <div className="navbar bg-slate-900">
@@ -75,7 +80,6 @@ const Header = () => {
            
               <input type="checkbox" />
               
-            
               <svg className="swap-on fill-current w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
               
 
@@ -83,26 +87,22 @@ const Header = () => {
               
               </label>
           <div className="dropdown dropdown-end">
+          {
+                  user ?
+            
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              
               <div className="w-10 rounded-full">
-
-              {
-                          user.photoURL?
-                          <label tabindex="0" className="btn btn-ghost btn-circle avatar avatar online">
-                          <div className="w-10 rounded-full">
-                          <img src={user.photoURL}/>
-                          </div>
-                          </label>
-                          :
-                          <label tabindex="0" className="btn btn-ghost btn-circle avatar avatar offline">
-                          <div className="w-10 rounded-full">
-                          <img src={user.photoURL}/>
-                          </div>
-                          </label>
-                        }
-                
+                    <img src={user.photoURL}/>
               </div>
             </label>
+                  
+                  :
+                  <Link to={'/login'} className="btn px-5">Log in</Link>
+              }
+                
+              
+            
             <ul
               tabIndex={0}
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-slate-900 text-white rounded-box w-52"
@@ -114,18 +114,20 @@ const Header = () => {
                 <a>Settings</a>
               </li>
               <li>
-                
+              {
+                  user &&
+                  <button onClick={logOut}>log out</button>
+                  
+                    
+              }
               
-              
-              <Link to={"/login"}>log out</Link>
               </li>
             </ul>
           </div>
-
-
-
           
-          <div className="modal" id="my-modal-2">
+          {
+              user &&
+              <div className="modal" id="my-modal-2">
             
                       
                   <div>
@@ -138,13 +140,25 @@ const Header = () => {
                     <section className="w-72 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
                       
 
-                        <div className="mt-6 w-fit mx-auto">
-                            <img src={user.photoURL}/>
+                        <div className="mt-6 w-fit mx-auto ">
+                            {
+                              user?.photoURL &&
+                              <img className="rounded-full" src={user.photoURL}/>
+                            }
+                            
                         </div>
 
                         <div className="mt-8 ">
-                            <h2 className="text-white font-bold text-2xl tracking-wide">{user.displayName}</h2>
-                            <p className="text-white">{user.email}</p>
+                            {
+                              user?.displayName &&
+                              <h2 className="text-white font-bold text-2xl tracking-wide">{user.displayName}
+                            </h2>
+                            }
+                            {
+                              user?.email &&
+                              <p className="text-white">{user.email}</p>
+                            }
+                            
                         </div>
                         <p className="text-emerald-400 font-semibold mt-2.5" >
                             Active
@@ -161,6 +175,8 @@ const Header = () => {
                     </section>
                       </div>
           </div>
+           }
+          
         </div>
       </div>
     </div>

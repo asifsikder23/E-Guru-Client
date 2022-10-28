@@ -1,4 +1,4 @@
-import { async } from '@firebase/util';
+
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../components/Blog';
 import Courses from '../components/Courses';
@@ -7,6 +7,8 @@ import Error from '../components/Error';
 import Faq from '../components/Faq';
 import Home from '../components/Home';
 import Login from '../components/Login';
+import Primium from '../components/Primium';
+import PrivateRoute from '../components/PrivateRoute';
 import Register from '../components/Register';
 import Main from '../Layout/Main';
 
@@ -46,6 +48,11 @@ import Main from '../Layout/Main';
           path: '/course/:id',
           loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`),
           element: <Data></Data>
+          
+        },
+        {
+          path: '/premium',
+          element: <PrivateRoute><Primium></Primium></PrivateRoute>
           
         },
         {

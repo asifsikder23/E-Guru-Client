@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -7,25 +7,35 @@ import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/UserContext";
 
 const Home = () => {
+  const {user} = useContext(AuthContext)
   return (
-    <div>
+    <div className="bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
       <div
         className="hero min-h-screen"
-        style={{ backgroundImage: `url("https://placeimg.com/1000/800/arch")` }}
+        style={{ backgroundImage: `url("https://i.pinimg.com/originals/3d/08/e0/3d08e03cb40252526fee2036a67f07f1.gif")` }}
       >
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
+        <div className="hero-overlay "></div>
+        <div className="hero-content text-center ">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-            <p className="mb-5">
+            <h1 className="mb-5 text-5xl font-bold text-zinc-50">HELLO THERE</h1>
+            <p className="mb-5 text-zinc-50">
               Online learning takes advantage of technology to simulate or
               improve upon traditional methods of teaching.
             </p>
-            <Link to={"/courses"} className="btn btn-primary">
-              Get Started
+            {
+              !user&&
+              <div className="flex justify-center gap-5">
+            <Link to={"/login"} className="btn btn-warning px-10">
+              Login
             </Link>
+            <Link to={"/register"} className="btn btn-success px-7">
+              Register
+            </Link>
+            </div>
+            }
           </div>
         </div>
       </div>
@@ -100,7 +110,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 mt-6">
         <div className="hero-content flex-col lg:flex-row">
           <img
             src="https://placeimg.com/260/400/arch"
@@ -120,7 +130,7 @@ const Home = () => {
               networked and web-based technology, to help individual performance
               and development.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <Link to={'/courses'} className="btn btn-primary">Get Started</Link>
           </div>
         </div>
       </div>
@@ -150,7 +160,7 @@ const Home = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <div className="card w-96">
+              <div className="card w-96 ">
                 <figure>
                   <img
                     src="https://media.istockphoto.com/photos/smiling-man-outdoors-in-the-city-picture-id1179420343?b=1&k=20&m=1179420343&s=612x612&w=0&h=c9Z3DyUg-YvgOQnL_ykTIgVTWXjF-GNo4FUQ7i5fyyk="
@@ -235,6 +245,43 @@ const Home = () => {
             </SwiperSlide>
           </Swiper>
         </>
+      </div>
+      <div className="w-full relative flex items-center justify-center">
+        <img
+          src="https://i.ibb.co/4sYZ8gC/img-2.png"
+          alt="dining"
+          className="w-full h-full absolute z-0 hidden xl:block"
+        />
+        <img
+          src="https://i.ibb.co/bbS3J9C/pexels-max-vakhtbovych-6301182-1.png"
+          alt="dining"
+          className="w-full h-full absolute z-0 hidden sm:block xl:hidden"
+        />
+        <img
+          src="https://i.ibb.co/JKkzGDs/pexels-max-vakhtbovych-6301182-1.png"
+          alt="dining"
+          className="w-full h-full absolute z-0 sm:hidden"
+        />
+        <div className="bg-gray-800 bg-opacity-80 md:my-16 lg:py-16 py-10 w-full md:mx-24 md:px-12 px-4 flex flex-col items-center justify-center relative z-40">
+          <h1 className="text-4xl font-semibold leading-9 text-white text-center">
+            Don’t miss out!
+          </h1>
+          <p className="text-base leading-normal text-center text-white mt-6">
+            Subscribe to your newsletter to stay in the loop. Our newsletter is
+            sent once in <br />a week on every friday so subscribe to get latest
+            news and updates.
+          </p>
+          <div className="sm:border border-white flex-col sm:flex-row flex items-center lg:w-5/12 w-full mt-12 space-y-4 sm:space-y-0">
+            <input
+              className="border border-white sm:border-transparent text-base w-full font-medium leading-none text-white p-4 focus:outline-none bg-transparent placeholder-white"
+              placeholder="Email Address"
+              type="email"
+            />
+            <button className="focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full sm:w-auto bg-white py-4 px-6 hover:bg-opacity-75">
+              Subscribe
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

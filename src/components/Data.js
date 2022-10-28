@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { useRef } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 
 const Data = () => {
@@ -53,6 +53,70 @@ const Data = () => {
                 resources located outside of the browser’s origin.
               </p>
             </div>
+            <div className="stats stats-vertical lg:stats-horizontal shadow">
+              <div className="stat">
+                <div className="flex justify-center">
+                  <img
+                    className="w-16"
+                    src="https://www.svgrepo.com/show/23224/quarter-of-an-hour.svg"
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <div className="stat-title text-center">Hours</div>
+                  <div className="stat-value text-center">{course.hours}</div>
+                </div>
+              </div>
+
+              <div className="stat">
+                <div className="flex justify-center">
+                  <img
+                    className="w-16"
+                    src="https://pic.onlinewebfonts.com/svg/img_241150.png"
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <div className="stat-title text-center">Price</div>
+                  <div className="stat-value text-center">{course.price}$</div>
+                </div>
+              </div>
+
+              <div className="stat">
+                <div className="flex justify-center">
+                  <img
+                    className="w-16"
+                    src="https://www.pngitem.com/pimgs/m/326-3263491_enterprise-training-training-icon-svg-hd-png-download.png"
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <div className="stat-title text-center">CourseType</div>
+                  <div className="stat-value text-center">
+                    {course.courseType}
+                  </div>
+                </div>
+              </div>
+              <div className="stat">
+                <div className="flex justify-center">
+                  <img
+                    className="w-16"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7ECk56gM7j1tfPtqFW4Ht5JSBuSvZT5OBQKwTB4H3DQf_mjGnMGd4IN6kp8MQ58fUguM&usqp=CAU"
+                    alt=""
+                  />
+                </div>
+
+                <div>
+                  <div className="stat-title text-center">Certification</div>
+                  <div className="stat-value text-center">
+                    {course.certification}
+                  </div>
+                </div>
+              </div>
+            </div>
           </article>
 
           <div className="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
@@ -103,35 +167,28 @@ const Data = () => {
             <p className="text-xl font-semibold pb-5">Requirements:</p>
             <p className="pb-2">{course.requirements}</p>
 
-            <div className="stats stats-vertical lg:stats-horizontal shadow">
-              <div className="stat">
-                <div className="stat-title">Hours</div>
-                <div className="stat-value">{course.hours}</div>
-              </div>
-
-              <div className="stat">
-                <div className="stat-title">Price</div>
-                <div className="stat-value">{course.price}$</div>
-                
-              </div>
-
-              <div className="stat">
-                <div className="stat-title">CourseType</div>
-                <div className="stat-value">{course.courseType}</div>
-              </div>
-
-              <div className="stat">
-                <div className="stat-title">Certification</div>
-                <div className="stat-value">{course.certification}</div>
-              </div>
-            </div>
-
             <a
               href="#"
               className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
             >
               Get to know us
             </a>
+          </div>
+
+          <div className="card w-96 bg-base-100 shadow-xl">
+            <figure>
+              <img src="https://i.ytimg.com/vi/T4tWWGSxVB0/maxresdefault.jpg" alt="Shoes" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{course.name}</h2>
+              <p>{course.shortDes}</p>
+
+              <div className="card-actions justify-end">
+                
+                <Link to={'/premium'} className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4">Go Premium</Link>
+
+              </div>
+            </div>
           </div>
 
           <div className="w-full bg-white shadow flex flex-col my-4 p-6">

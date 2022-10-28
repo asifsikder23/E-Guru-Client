@@ -21,7 +21,7 @@ const Course = ({ course }) => {
             </div>
           </div>
           <Link className="btn btn-block my-5" to={`/course/${course._id}`}>
-            Premium
+            See Details
           </Link>
         </div>
       </div>

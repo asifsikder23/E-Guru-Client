@@ -1,24 +1,29 @@
 import React, { useContext } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/UserContext';
 import { useState } from 'react';
- 
+import Swal from 'sweetalert2'
 
-
+import {  sendEmailVerification, updateProfile } from 'firebase/auth';
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
 
-
+  const [success, setSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
-  const {googleSignIn, gitSignIn} = useContext(AuthContext)
+  const {googleSignIn, gitSignIn, auth} = useContext(AuthContext)
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/";
   
   const handleGoogleLogIn =()=>{
     googleSignIn()
     .then(result => {
       const user = result.user;
       
-      console.log(user);
+      navigate(from,{replace:true})
     })
     .catch(error =>{
       console.error('error: ', error)
@@ -29,28 +34,27 @@ const Register = () => {
     .then(result => {
       const user = result.user;
       
-      console.log(user);
+      navigate(from,{replace:true})
     })
     .catch(error =>{
       console.error('error: ', error)
     })
   }
-  
 
-
-
-const { createUser } = useContext(AuthContext);
 console.log('createUser', createUser);
 
     const handleSubmit = event =>{
         event.preventDefault();
+        setSuccess(false)
         const form = event.target;
         const email = form.email.value;
         const name = form.name.value;
         const password = form.password.value;
+        const photo = form.photo.value;
         const birth = form.birth.value;
         const number = form.number.value;
-        console.log(name, email, password, birth, number);
+      
+        console.log(name, email, photo, password, birth, number);
 
         if(!/(?=.*[!@#$&*])/.test(password)){
           setPasswordError('Please provide at least one special case letter.')
@@ -69,12 +73,42 @@ console.log('createUser', createUser);
         createUser(email, password)
         .then(result =>{
           const user = result.user;
-          console.log('registered user', user);
+          navigate(from,{replace:true})
+          // console.log('registered user', user);
+          setSuccess(true);
+          verifyEmail();
+          updateUser(name, photo);
+          
         })
         .catch(error =>{
           console.error('error', error)
         })
       }
+      const verifyEmail =()=>{
+        sendEmailVerification(auth.currentUser)
+        .then(()=>{
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Check your Mail for verification ',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+    }
+    const updateUser =(name, photo)=>{
+      updateProfile(auth.currentUser,{
+          displayName:name,
+          photoURL:photo
+      })
+      .then(()=>{
+          console.log('display name updated');
+      })
+      .catch(error=>{
+          console.error('error',error);
+      })
+  }
+      
           return (
             <div>
               <div className="container mx-auto min-h-screen">
@@ -102,6 +136,18 @@ console.log('createUser', createUser);
                           name="number"
                           type="text"
                           placeholder="Mobile Number"
+                          className="input input-bordered"
+                          required
+                        />
+                      </div>
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text">photo URL</span>
+                        </label>
+                        <input
+                          name="photo"
+                          type='url'
+                          placeholder="photo URL"
                           className="input input-bordered"
                           required
                         />
@@ -147,7 +193,7 @@ console.log('createUser', createUser);
                         </p>
                       </div>
                       <div className="form-control mt-6">
-                        <button className="btn btn-primary">Register</button>
+                        <button  className="btn btn-primary">Register</button>
                       </div>
 
                       <h2 className='text-center'>

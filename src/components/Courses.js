@@ -1,36 +1,24 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Course from "./Course";
-import Data from "./Data";
+
 
 
 const Courses = () => {
     const courses = useLoaderData();
     console.log(courses);
   return (
-    <div>
-        <h1 className="text-4xl font-bold py-5 text-center"> All category courses </h1>
+    <div className="bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 pb-10">
+        <h1 className="text-4xl font-bold py-5 text-center "> All category courses</h1>
       <div className="container mx-auto md:grid grid-cols-4 gap-5">
-        <div className="border text-center py-5 px-2 rounded-lg">
+        <div className="text-center py-5 px-2 rounded-lg">
+          <p className="text-2xl font-bold pb-5">Total Courses: {courses.length}</p>
+
           <ul className="space-y-3">
-            <li className="btn rounded-lg w-full">
-              <a href="#">Web Design & Development</a>
-            </li>
-            <li className="btn rounded-lg w-full">
-              <a href="#">UI-UX Design</a>
-            </li>
-            <li className="btn rounded-lg w-full">
-              <a href="#">Graphics Design</a>
-            </li>
-            <li className="btn rounded-lg w-full">
-              <a href="#">Animation and VFX</a>
-            </li>
-            <li className="btn rounded-lg w-full">
-              <a href="#">Digital Marketing</a>
-            </li>
-            <li className="btn rounded-lg w-full">
-              <a href="#">Mobile App Development</a>
-            </li>
+            {courses.map(course => <li className="btn rounded-lg w-full">
+              <Link to={`/course/${course._id}`}>{course.categoryName}</Link>
+            </li>)}
+
           </ul>
         </div>
 
