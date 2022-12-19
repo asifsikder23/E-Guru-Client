@@ -5,8 +5,10 @@ import { useState } from 'react';
 import Swal from 'sweetalert2'
 
 import {  sendEmailVerification, updateProfile } from 'firebase/auth';
+import useTitle from '../hooks/useTitle';
 
 const Register = () => {
+  useTitle('Register')
   const { createUser } = useContext(AuthContext);
 
   const [success, setSuccess] = useState(false);
@@ -108,7 +110,6 @@ console.log('createUser', createUser);
           console.error('error',error);
       })
   }
-      
           return (
             <div>
               <div className="container mx-auto min-h-screen">

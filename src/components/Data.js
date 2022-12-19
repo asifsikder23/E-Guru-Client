@@ -3,10 +3,12 @@ import React from "react";
 import { useRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import useTitle from "../hooks/useTitle";
 
 const Data = () => {
   const course = useLoaderData();
   console.log(course);
+  useTitle('Course Details')
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({

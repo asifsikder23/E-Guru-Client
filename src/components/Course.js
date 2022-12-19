@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useTitle from "../hooks/useTitle";
 
 const Course = ({ course }) => {
   console.log(course);
+  
   return (
     <div>
       <div className="card w-72 bg-base-100 shadow-xl">

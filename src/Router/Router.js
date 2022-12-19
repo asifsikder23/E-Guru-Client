@@ -37,10 +37,6 @@ import Main from '../Layout/Main';
           loader: () => fetch('https://e-guru-server.vercel.app/courses')
         },
         {
-          path: '/faq',
-          element: <Faq></Faq>
-        },
-        {
           path: '/blog',
           element: <Blog></Blog>
         },

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import useTitle from "../hooks/useTitle";
 import Course from "./Course";
 
 
@@ -7,6 +8,7 @@ import Course from "./Course";
 const Courses = () => {
     const courses = useLoaderData();
     console.log(courses);
+    useTitle('Courses')
   return (
     <div className="bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 pb-10">
         <h1 className="text-4xl font-bold py-5 text-center "> All category courses</h1>

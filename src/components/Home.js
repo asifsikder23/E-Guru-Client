@@ -4,12 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { FreeMode, Pagination } from "swiper";
+import { Autoplay, EffectCoverflow, FreeMode, Pagination } from "swiper";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/UserContext";
+import useTitle from "../hooks/useTitle";
 
 const Home = () => {
+  useTitle('Home')
   const {user} = useContext(AuthContext)
   return (
     <div className="bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
@@ -150,15 +152,25 @@ const Home = () => {
       <div>
         <>
           <Swiper
-            slidesPerView={2}
-            spaceBetween={30}
-            freeMode={true}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[FreeMode, Pagination]}
-            className="mySwiper"
-          >
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          pagination={true}
+          modules={[Autoplay, EffectCoverflow, Pagination]}
+          className="mySwiper"
+        >
             <SwiperSlide>
               <div className="card w-96 ">
                 <figure>

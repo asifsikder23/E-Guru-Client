@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/UserContext";
+import useTitle from "../hooks/useTitle";
 
 
 const Primium = () => {
+  useTitle('Premium')
   const {user} = useContext(AuthContext)
   console.log(user);
     

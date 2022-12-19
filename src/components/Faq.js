@@ -5,8 +5,10 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import useTitle from "../hooks/useTitle";
 
 const Faq = () => {
+  useTitle('FAQ')
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value) => {

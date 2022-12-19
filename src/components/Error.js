@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useTitle from '../hooks/useTitle';
 
 const Error = () => {
+    useTitle('Error')
     return (
-        
             <div className="container">
                     
                         <div className="block md:flex justify-center items-center py-5">

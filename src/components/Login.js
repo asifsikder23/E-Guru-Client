@@ -12,10 +12,12 @@ import {
   signInWithPopup,
   
 } from "firebase/auth";
+import useTitle from "../hooks/useTitle";
 
 
 
 const Login = () => {
+  useTitle('Log In')
   const [success, setSuccess] = useState(false);
   
   const [userEmail, setUserEmail] = useState("");
@@ -100,10 +102,9 @@ const Login = () => {
   };
   const handleResetPass = () => {
     if (!userEmail) {
-      Swal.fire("Please Enter Your Email");
+      alert("Please check Your Email");
       return;
     }
-    
   };
   return (
     <div>
