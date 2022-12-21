@@ -3,8 +3,6 @@ import { Link, useLoaderData } from "react-router-dom";
 import useTitle from "../hooks/useTitle";
 import Course from "./Course";
 
-
-
 const Courses = () => {
     const courses = useLoaderData();
     console.log(courses);
@@ -17,20 +15,18 @@ const Courses = () => {
           <p className="text-2xl font-bold pb-5">Total Courses: {courses.length}</p>
 
           <ul className="space-y-3">
-            {courses.map(course => <li className="btn rounded-lg w-full">
-              <Link to={`/course/${course._id}`}>{course.categoryName}</Link>
-            </li>)}
+            {courses.map(course => 
+              <Link to={`/course/${course._id}`}><li className="btn rounded-lg w-full my-2">{course.categoryName}</li></Link>
+            )}
 
           </ul>
         </div>
-
-
-       
         
         <div className="flex flex-wrap justify-center gap-5 col-span-3">
 
         {courses.map(course=>{
-                return <Course course={course}></Course>
+                return <Course
+                key={course._id} course={course}></Course>
         })}
         
 

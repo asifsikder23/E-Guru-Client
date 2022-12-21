@@ -9,6 +9,7 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/UserContext";
 import useTitle from "../hooks/useTitle";
+import CourseCategory from "./CourseCategory";
 
 const Home = () => {
   useTitle('Home')
@@ -114,16 +115,18 @@ const Home = () => {
 
       <div className="hero min-h-screen bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 mt-6">
         <div className="hero-content flex-col lg:flex-row">
+          <div className="">
           <img
-            src="https://placeimg.com/260/400/arch"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="https://i.pinimg.com/originals/06/ef/d9/06efd9fc18aade1ce5a7f80374b5ce61.gif"
+            className=" rounded-lg shadow-2xl"
           />
+          </div>
 
-          <div className="pl-6">
+          <div className="pl-6 w-1/2">
             <h1 className="text-5xl font-bold">
               Explore The E-learning Institute
             </h1>
-            <p className="py-6">
+            <p className="py-6 text-justify">
               e-Learning is not new: it has been around in some form or other
               for the past ten years. However, interest is rapidly growing. A
               quarter of all learning is expected to take place electronically
@@ -136,7 +139,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      <CourseCategory></CourseCategory>
       <div className="container mx-auto">
         <h1 className="text-5xl text-center font-bold py-5">
           Meet Our Successful Students

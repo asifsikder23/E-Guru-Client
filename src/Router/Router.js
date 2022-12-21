@@ -1,6 +1,7 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../components/Blog';
+import CourseCategory from '../components/CourseCategory';
 import Courses from '../components/Courses';
 import Data from '../components/Data';
 import Error from '../components/Error';
@@ -34,7 +35,7 @@ import Main from '../Layout/Main';
         {
           path: '/courses',
           element: <Courses></Courses>,
-          loader: () => fetch('https://e-guru-server.vercel.app/courses')
+          loader: () => fetch('https://b610-lerning-platform-server-side-asifsikder23.vercel.app/courses')
         },
         {
           path: '/blog',
@@ -42,7 +43,7 @@ import Main from '../Layout/Main';
         },
         {
           path: '/course/:id',
-          loader: ({params}) => fetch(`https://e-guru-server.vercel.app/course/${params.id}`),
+          loader: ({params}) => fetch(`https://b610-lerning-platform-server-side-asifsikder23.vercel.app/course/${params.id}`),
           element: <Data></Data>
           
         },
